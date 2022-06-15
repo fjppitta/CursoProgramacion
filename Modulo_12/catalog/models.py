@@ -15,7 +15,7 @@ class Genre(models.Model):
 class Movie(models.Model):
     titulo = models.CharField(max_length=32,help_text='Coloca aquí el titulo de la pelicula')
     director = models.ForeignKey('Director',on_delete=models.SET_NULL,null=True)
-    anio = models.CharField(max_length=4,help_text='Coloca aquí el año de la pelicula')
+    anio = models.CharField('Año',max_length=4,help_text='Coloca aquí el año de la pelicula')
     clasificacion = models.CharField(max_length=10,help_text='Coloca aqui la clasificación')
     genero = models.ManyToManyField(Genre)
     resumen = models.TextField(max_length=400,help_text='Coloca aqui un resumen de la pelicula',null=True)
@@ -55,10 +55,10 @@ class MovieInstance(models.Model):
         return '%s (%s)' % (self.id,self.movie.titulo)
 
 class Director(models.Model):
-    primer_nombre = models.CharField(max_length=100)
-    primer_apellido = models.CharField(max_length=100)
+    primer_nombre = models.CharField('Nombre',max_length=100)
+    primer_apellido = models.CharField('Apellido',max_length=100)
     fecha_de_nacimiento = models.DateField(null=True,blank=True)
-    fecha_de_muerte = models.DateField('Muerto',null=True,blank=True)
+    fecha_de_muerte = models.DateField('Fecha de Fallecimiento',null=True,blank=True)
 
     def get_absolute_url(self):
         return reverse('director-detail',args=[str(self.id)])
